@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Trees
+  m_EditorClassIdentifier: 
+  m_GroupName: Trees
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 857edbe54a1ce0e4980ba90bc35c4c16
+  m_SerializeEntries:
+  - m_GUID: 29053e47c962aa948bc8e211ee9627f6
+    m_Address: tree_palm
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 5521587064478486135, guid: 29053e47c962aa948bc8e211ee9627f6, type: 3}
+    m_TargetAsset: {fileID: 5521587064478486135, guid: 29053e47c962aa948bc8e211ee9627f6, type: 3}
+  - m_GUID: 42886e0b0cfbff24ab6ec4975b33318a
+    m_Address: tree_pineSmallA
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 1503652736538171894, guid: 42886e0b0cfbff24ab6ec4975b33318a, type: 3}
+    m_TargetAsset: {fileID: 1503652736538171894, guid: 42886e0b0cfbff24ab6ec4975b33318a, type: 3}
+  - m_GUID: e79e322a798425543b4cb6e5db332bf8
+    m_Address: tree_plateau_dark
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 3391948851678460664, guid: e79e322a798425543b4cb6e5db332bf8, type: 3}
+    m_TargetAsset: {fileID: 3391948851678460664, guid: e79e322a798425543b4cb6e5db332bf8, type: 3}
+  - m_GUID: e140b7baf56b98142a2d90ca0f65348b
+    m_Address: tree_tall
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 39967815719846217, guid: e140b7baf56b98142a2d90ca0f65348b, type: 3}
+    m_TargetAsset: {fileID: 39967815719846217, guid: e140b7baf56b98142a2d90ca0f65348b, type: 3}
+  - m_GUID: fbde1b6514e2a564cb0f6fa63f987378
+    m_Address: tree_thin
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 2983067410555979760, guid: fbde1b6514e2a564cb0f6fa63f987378, type: 3}
+    m_TargetAsset: {fileID: 2983067410555979760, guid: fbde1b6514e2a564cb0f6fa63f987378, type: 3}
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: a556e9fcf6e48cd4faccc15f2f57fc2f, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 0829d179ad505fc48b8a3cc94127ed92, type: 2}
+    - {fileID: 11400000, guid: d7829ccb6b588c84dbf041cb350dae8b, type: 2}

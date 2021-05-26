@@ -1,0 +1,16 @@
+
+.idea/
+
+Library/
+
+obj/
+
+Logs/
+
+UserSettings/
+
+*.csproj
+
+*.DotSettings
+
+*.sln

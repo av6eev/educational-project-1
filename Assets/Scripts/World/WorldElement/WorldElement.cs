@@ -16,9 +16,14 @@ namespace World
             {
                 Destroy(_prefab);
             }
-
+            
             MeshRenderer.enabled = false;
             _prefab = Instantiate(obj, SpawnPoint);
+        }
+
+        public void SetId(int id)
+        {
+            Text.text = id.ToString();
         }
     }
 }

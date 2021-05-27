@@ -9,6 +9,7 @@ namespace Utilities
         [Space][Header("Ground")]
         public int GroundLength;
         public int GroundWidth;
+        public bool HasGroundPath;
         
         [Space][Header("Tree Settings")]
         public List<TreeTypes> TreeTypes;
@@ -16,11 +17,8 @@ namespace Utilities
         public float MinTreeSize;
         public float MaxTreeSize;
         
-        [Space][Header("Booleans")]
-        public bool HasGroundPath;
-        
-        [Space][Header("Path Chance")]
-        public float PathChance;
-        public float PathRotationChance;
+        [Space][Header("Path Settings")]
+        public int ChanceToGeneratePath;
+        public int RotationChance;
     }
 }

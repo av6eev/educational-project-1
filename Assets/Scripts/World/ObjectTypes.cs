@@ -1,6 +1,6 @@
 ﻿namespace World.Cell
 {
-    public enum ObjectType
+    public enum ObjectTypes
     {
         Tree,
         Path

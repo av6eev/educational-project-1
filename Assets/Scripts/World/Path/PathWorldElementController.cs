@@ -28,7 +28,7 @@ namespace World
         private void OnUpdate(PathTypes obj, int angle)
         {
             _model.IsUsed = true;
-            _view.ChangeObject(obj, angle);
+            _view.ChangePathObject(obj, angle);
         }
     }
 }

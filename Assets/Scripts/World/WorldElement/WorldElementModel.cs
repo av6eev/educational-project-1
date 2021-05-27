@@ -2,26 +2,28 @@
 using UnityEngine;
 using Utilities;
 using World.Cell;
+using World.Tree;
 
 namespace World
 {
     public class WorldElementModel
     {
         public event Action ChangeObjectType;
-
+        
+        public int Id { get; }
         public int Angle;
         public float TreeSize;
+        public TreeTypes TreeTypes;
+        public ObjectTypes ObjectTypes;
 
         public PathWorldElementModel PathElementModel;
+        public TreeWorldElementModel TreeElementModel;
 
-        public int Id { get; }
         public Vector3 Position { get; }
-
-        public ObjectType ObjectType;
-        public TreeTypes TreeTypes;
 
         public bool IsUsed { get; set; }
         public bool IsPath { get; private set; }
+        public bool IsTree { get; private set; }
 
         public WorldElementModel(int id,Vector3 position, LocationData data)
         {
@@ -39,23 +41,16 @@ namespace World
             PathElementModel.SearchNearby(model, Id, data);
         }
 
-        public void SetTree(TreeTypes typeTree, float treeSize)
+        public void TransformObject(ObjectTypes types)
         {
-            TreeTypes = typeTree;
-            TreeSize = treeSize;
-            ObjectType = ObjectType.Tree;
-            IsUsed = true;
-        }
+            ObjectTypes = types;
 
-        public void TransformObject(ObjectType type)
-        {
-            ObjectType = type;
-
-            switch (type)
+            switch (types)
             {
-                case ObjectType.Tree:
+                case ObjectTypes.Tree:
+                    IsTree = true;
                     break;
-                case ObjectType.Path:
+                case ObjectTypes.Path:
                     IsPath = true;
                     break;
             }

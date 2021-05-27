@@ -2,10 +2,18 @@
 {
     public enum PathDirection
     {
+        None,
         Left,
         Top,
         Bottom,
         Right,
-        None,
+        LeftToTop,
+        LeftToBottom,
+        RightToTop,
+        RightToBottom,
+        TopToLeft,
+        TopToRight,
+        BottomToLeft,
+        BottomToRight
     }
 }

@@ -6,9 +6,8 @@ namespace World
     public class WorldModel
     {
         public LocationData LocationData;
-        public List<WorldElementModel> CellModels = new List<WorldElementModel>();
-
-        public WorldElementModel this[int id] => CellModels[id];
+        public List<WorldElementModel> WorldElementModels = new List<WorldElementModel>();
+        public WorldElementModel this[int id] => WorldElementModels[id];
 
         public WorldModel(LocationData data)
         {
@@ -17,9 +16,9 @@ namespace World
 
         public void SearchNearby()
         {
-            foreach (var cellModel in CellModels)
+            foreach (var worldElementModel in WorldElementModels)
             {
-                cellModel.SearchNearby(this, LocationData);
+                worldElementModel.SearchNearby(this, LocationData);
             }
         }
     }

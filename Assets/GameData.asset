@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1c1f88f13bc450bb6ee82b8fedf03a3, type: 3}
   m_Name: GameData
   m_EditorClassIdentifier: 
-  GroundLength: 50
-  GroundWidth: 50
+  GroundLength: 20
+  GroundWidth: 20
+  HasGroundPath: 1
   TreeTypes: 0000000001000000020000000300000004000000
-  TreesCount: 0
+  TreesCount: 10
   MinTreeSize: 0.5
   MaxTreeSize: 1
-  HasGroundPath: 1
-  PathChance: 80
-  PathRotationChance: 10
+  ChanceToGeneratePath: 90
+  RotationChance: 60

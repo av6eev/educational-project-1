@@ -1,6 +1,7 @@
 ﻿using System;
 using Utilities;
 using World.Cell;
+using World.Tree;
 
 namespace World
 {
@@ -20,12 +21,16 @@ namespace World
 
         public void Activate()
         {
-            foreach (var cellModel in _worldModel.CellModels)
+            foreach (var worldElementModel in _worldModel.WorldElementModels)
             {
+                var view = _worldView.Create(worldElementModel.Position);
+
+                _controllerCollection.Add(new TreeWorldElementController(worldElementModel.TreeElementModel, view));
+                
                 if (_worldModel.LocationData.HasGroundPath)
                 {
-                    var view = _worldView.Create(cellModel.Position);
-                    _controllerCollection.Add(new PathWorldElementController(cellModel.PathElementModel, view));
+                    _controllerCollection.Add(new PathWorldElementController(worldElementModel.PathElementModel, view));
+                    view.WorldElement.SetId(worldElementModel.Id);
                 }
             }
             _controllerCollection.Activate();

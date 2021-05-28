@@ -1,155 +1,46 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using Utilities;
-using World.Cell;
+using World.Experimental;
+using World.Experimental.Systems;
 using Random = UnityEngine.Random;
 
-namespace World
+namespace World.Path
 {
     public class WorldPathGenerator : IWorldGenerator
     {
-        private readonly List<PathWorldElementModel> _active = new List<PathWorldElementModel>();
-        private readonly List<PathWorldElementModel> _remove = new List<PathWorldElementModel>();
-        private readonly List<PathWorldElementModel> _add = new List<PathWorldElementModel>();
-
-        public void Generate(WorldModel model)
+        public void Generate(GameContext context)
         {
-            var startPoint = Random.Range(0, model.WorldElementModels.Count);
-            var startElement = model[startPoint];
+            var startPoint = Random.Range(0, context.BlocksWorldModel.Blocks.Count);
+            var xRandom = Random.Range(0, context.LocationData.X);
+            var zRandom = Random.Range(0, context.LocationData.Z);
+            var pathBlock = new PathBlock(context.BlocksWorldModel.Blocks[new Vector3(xRandom, 0, zRandom)], Direction.None);
+            
+            context.BlocksWorldModel.Blocks[new Vector3(xRandom, 0, zRandom)] = pathBlock;
+     
+            pathBlock.SetStartPath();
 
-            while (startElement.IsUsed || startElement.IsPath)
+            var system = context.SystemCollection.Get<GeneratePathSystem>(SystemTypes.GeneratePathSystem);
+
+            if (pathBlock.TryGetMoveDirection(context.BlocksWorldModel, out var leftBlock, Direction.Left))
             {
-                startPoint = Random.Range(0, model.WorldElementModels.Count);
-                startElement = model[startPoint];
+                leftBlock.SetDefault();
+                system.Add(leftBlock);
             }
-
-            startElement.TransformObject(ObjectTypes.Path);
-            startElement.PathElementModel.SetStartPath();
-
-            startElement.PathElementModel.MoveLeft();
-            startElement.PathElementModel?.LeftNearbyElement.PathElementModel?.SetDefault();
-            startElement.PathElementModel.MoveRight();
-            startElement.PathElementModel?.RightNearbyElement.PathElementModel?.SetDefault();
-            startElement.PathElementModel.MoveTop();
-            startElement.PathElementModel?.TopNearbyElement.PathElementModel?.SetDefault();
-            startElement.PathElementModel.MoveBottom();
-            startElement.PathElementModel?.BottomNearbyElement.PathElementModel?.SetDefault();
-
-            _active.Add(startElement.PathElementModel.BottomNearbyElement.PathElementModel);
-            _active.Add(startElement.PathElementModel.TopNearbyElement.PathElementModel);
-            _active.Add(startElement.PathElementModel.LeftNearbyElement.PathElementModel);
-            _active.Add(startElement.PathElementModel.RightNearbyElement.PathElementModel);
-
-            while (_active.Count > 0)
+            if (pathBlock.TryGetMoveDirection(context.BlocksWorldModel, out var rightBlock, Direction.Right))
             {
-                foreach (var elementModel in _remove)
-                {
-                    _active.Remove(elementModel);
-                }
-
-                _remove.Clear();
-                foreach (var elementModel in _add)
-                {
-                    _active.Add(elementModel);
-                }
-
-                _add.Clear();
-
-                foreach (var element in _active)
-                {
-                    if (element.GetDirectionModel() != null)
-                    {
-                        element.GetDirectionModel().Direction = element.Direction;
-                    }
-
-                    if (Random.Range(0, 100) < element.Data.ChanceToGeneratePath)
-                    {
-                        if (element.GetDirectionModel() != null && !element.GetDirectionModel().IsUsed)
-                        {
-                            if (Random.Range(0, 100) < element.Data.RotationChance)
-                            {
-                                var randomNumber = Random.Range(0, 100);
-
-                                if (element.Direction == PathDirection.Left)
-                                {
-                                    if (randomNumber < 50)
-                                    {
-                                        Debug.Log("Слева вверх");
-                                        element.GetDirectionModel()?.RotateFromLeftToTop();
-                                    }
-                                    else
-                                    {
-                                        Debug.Log("Слева вниз");
-                                        element.GetDirectionModel()?.RotateFromLeftToBottom();
-                                    }
-                                }
-
-                                if (element.Direction == PathDirection.Right)
-                                {
-                                    if (randomNumber < 50)
-                                    {
-                                        Debug.Log("Справа вверх");
-                                        element.GetDirectionModel()?.RotateFromRightToTop();
-                                    }
-                                    else
-                                    {
-                                        Debug.Log("Справа вниз");
-                                        element.GetDirectionModel()?.RotateFromRightToBottom();
-                                    }
-                                }
-
-                                if (element.Direction == PathDirection.Top)
-                                {
-                                    if (randomNumber < 50)
-                                    {
-                                        Debug.Log("Сверху налево");
-                                        element.GetDirectionModel()?.RotateFromTopToLeft();
-                                    }
-                                    else
-                                    {
-                                        Debug.Log("Сверху направо");
-                                        element.GetDirectionModel()?.RotateFromTopToRight();
-                                    }
-                                }
-
-                                if (element.Direction == PathDirection.Bottom)
-                                {
-                                    if (randomNumber < 50)
-                                    {
-                                        Debug.Log("Снизу налево");
-                                        element.GetDirectionModel()?.RotateFromBottomToLeft();
-                                    }
-                                    else
-                                    {
-                                        Debug.Log("Снизу направо");
-                                        element.GetDirectionModel()?.RotateFromBottomToRight();
-                                    }
-                                }
-                            }
-                            else
-                            {
-                                Debug.Log("НЕ БУДЕТ ПОВОРОТА, СТАВЛЮ ДЕФОЛТ"); //не работает
-                                element.GetDirectionModel()?.SetDefault();
-                            }
-                        }
-                        else
-                        {
-                            Debug.Log("ПУТЬ ЗАНЯТ. ПОСТАВЛЮ НОВОЕ НАЧАЛО"); //неправильно работает
-                            element.GetDirectionModel()?.SetStartPath();
-                        }
-
-                        if (element.GetDirectionModel() != null)
-                            _add.Add(element.GetDirectionModel());
-                    }
-                    else
-                    {
-                        Debug.Log("ПУТЬ НЕ СГЕНЕРИРОВАН. СТАВЛЮ КОНЕЦ");
-                        element.GetDirectionModel()?.SetEndPath();
-                    }
-
-                    _remove.Add(element);
-                }
+                rightBlock.SetDefault();
+                system.Add(rightBlock);
+            }
+            if (pathBlock.TryGetMoveDirection(context.BlocksWorldModel, out var topBlock, Direction.Top))
+            {
+                topBlock.SetDefault();
+                system.Add(topBlock);
+            }
+            if (pathBlock.TryGetMoveDirection(context.BlocksWorldModel, out var bottomBlock, Direction.Bottom))
+            {
+                bottomBlock.SetDefault();
+                system.Add(bottomBlock);
             }
         }
     }

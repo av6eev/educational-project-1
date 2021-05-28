@@ -1,4 +1,4 @@
-﻿namespace World.Cell
+﻿namespace World
 {
     public enum ObjectTypes
     {

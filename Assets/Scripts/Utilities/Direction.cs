@@ -1,6 +1,6 @@
 ﻿namespace Utilities
 {
-    public enum PathDirection
+    public enum Direction
     {
         None,
         Left,

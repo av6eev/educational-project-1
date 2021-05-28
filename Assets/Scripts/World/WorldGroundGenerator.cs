@@ -1,27 +1,28 @@
 ﻿using UnityEngine;
 using Utilities;
-using World.Cell;
+using World.Experimental;
+using World.WorldElement;
 
 namespace World
 {
     public class WorldGroundGenerator : IWorldGenerator
     {
-        public void Generate(WorldModel model)
+        public void Generate(GameContext context)
         {
-            var locationData = model.LocationData;
+            var locationData = context.LocationData;
             var counter = 0;
 
-            for (var i = 0; i < locationData.GroundLength; i++)
+            for (var i = 0; i < locationData.X; i++)
             {
-                for (var j = 0; j < locationData.GroundWidth; j++)
+                for (var j = 0; j < locationData.Z; j++)
                 {
-                    var worldElementModel = new WorldElementModel(counter,new Vector3(i, 0, j), locationData);
-                    model.WorldElementModels.Add(worldElementModel);
+                    var position = new Vector3(i, 0, j);
+                    var block = new Block(counter, position);
+                    
+                    context.BlocksWorldModel.Blocks.Add(position, block);
                     counter++;
                 }
             }
-
-            model.SearchNearby();
         }
     }
 }

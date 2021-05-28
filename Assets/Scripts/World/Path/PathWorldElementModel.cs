@@ -2,46 +2,46 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Utilities;
-using World.Cell;
+using World.WorldElement;
 
-namespace World
+namespace World.Path
 {
     public class PathWorldElementModel
     {
         public event Action<PathTypes, int> Update;
 
-        private static Dictionary<PathDirection, int> _anglesStraight = new Dictionary<PathDirection, int>()
+        private static Dictionary<Direction, int> _anglesStraight = new Dictionary<Direction, int>()
         {
-            {PathDirection.Right, 0},
-            {PathDirection.Left, -180},
-            {PathDirection.Top, -90},
-            {PathDirection.Bottom, 90},
-            {PathDirection.None, 0},
-            {PathDirection.LeftToTop, -90},
-            {PathDirection.LeftToBottom, 90},
-            {PathDirection.RightToTop, -90},
-            {PathDirection.RightToBottom, 90},
-            {PathDirection.TopToLeft, -180},
-            {PathDirection.TopToRight, 0},
-            {PathDirection.BottomToLeft, -180},
-            {PathDirection.BottomToRight, 0}
+            {Utilities.Direction.Right, 0},
+            {Utilities.Direction.Left, -180},
+            {Utilities.Direction.Top, -90},
+            {Utilities.Direction.Bottom, 90},
+            {Utilities.Direction.None, 0},
+            {Utilities.Direction.LeftToTop, -90},
+            {Utilities.Direction.LeftToBottom, 90},
+            {Utilities.Direction.RightToTop, -90},
+            {Utilities.Direction.RightToBottom, 90},
+            {Utilities.Direction.TopToLeft, -180},
+            {Utilities.Direction.TopToRight, 0},
+            {Utilities.Direction.BottomToLeft, -180},
+            {Utilities.Direction.BottomToRight, 0}
         };
 
-        private static Dictionary<PathDirection, int> _anglesRotation = new Dictionary<PathDirection, int>()
+        private static Dictionary<Direction, int> _anglesRotation = new Dictionary<Direction, int>()
         {
-            {PathDirection.LeftToTop, 180},
-            {PathDirection.LeftToBottom, -90},
-            {PathDirection.RightToTop, 90},
-            {PathDirection.RightToBottom, 0}, //0
-            {PathDirection.TopToLeft, 0}, 
-            {PathDirection.TopToRight, -90},
-            {PathDirection.BottomToLeft, 90}, //-180
-            {PathDirection.BottomToRight, 180}
+            {Utilities.Direction.LeftToTop, 180},
+            {Utilities.Direction.LeftToBottom, -90},
+            {Utilities.Direction.RightToTop, 90},
+            {Utilities.Direction.RightToBottom, 0}, 
+            {Utilities.Direction.TopToLeft, 0}, 
+            {Utilities.Direction.TopToRight, -90},
+            {Utilities.Direction.BottomToLeft, 90}, 
+            {Utilities.Direction.BottomToRight, 180}
         };
 
         public LocationData Data;
         public PathTypes PathTypes;
-        public PathDirection Direction;
+        public Direction Direction;
         public int Id;
 
         public WorldElementModel LeftNearbyElement;
@@ -60,16 +60,16 @@ namespace World
             Id = id;
             Data = data;
 
-            var raw = id / Data.GroundLength;
-            var idInLine = id - raw * data.GroundLength;
+            var raw = id / Data.X;
+            var idInLine = id - raw * data.X;
 
-            if (id % (data.GroundLength - 1) != 0 && id + 1 != data.GroundLength - 1)
+            if (id % (data.X - 1) != 0 && id + 1 != data.X - 1)
             {
                 RightNearbyElement = model.WorldElementModels[id + 1];
                 ExistRightNearbyElement = true;
             }
 
-            if (id % (data.GroundLength - 1) != 1 && id > 0)
+            if (id % (data.X - 1) != 1 && id > 0)
             {
                 LeftNearbyElement = model.WorldElementModels[id - 1];
                 ExistLeftNearbyElement = true;
@@ -77,13 +77,13 @@ namespace World
 
             if (raw != 0)
             {
-                TopNearbyElement = model.WorldElementModels[(raw - 1) * data.GroundLength + idInLine];
+                TopNearbyElement = model.WorldElementModels[(raw - 1) * data.X + idInLine];
                 ExistTopNearbyElement = true;
             }
 
-            if (raw != data.GroundWidth - 1)
+            if (raw != data.Z - 1)
             {
-                var dataGroundLength = (raw + 1) * data.GroundLength + idInLine;
+                var dataGroundLength = (raw + 1) * data.X + idInLine;
                 BottomNearbyElement = model.WorldElementModels[dataGroundLength];
                 ExistBottomNearbyElement = true;
             }
@@ -93,11 +93,11 @@ namespace World
 
         public void MoveLeft(PathTypes pathType = PathTypes.Straight)
         {
-            Direction = PathDirection.Left;
+            Direction = Direction.Left;
             if (ExistLeftNearbyElement)
             {
                 LeftNearbyElement.TransformObject(ObjectTypes.Path);
-                LeftNearbyElement.PathElementModel.Direction = PathDirection.Left;
+                LeftNearbyElement.PathElementModel.Direction = Direction.Left;
             }
             else
             {
@@ -107,11 +107,11 @@ namespace World
 
         public void MoveRight(PathTypes pathType = PathTypes.Straight)
         {
-            Direction = PathDirection.Right;
+            Direction = Direction.Right;
             if (ExistRightNearbyElement)
             {
                 RightNearbyElement.TransformObject(ObjectTypes.Path);
-                RightNearbyElement.PathElementModel.Direction = PathDirection.Right;
+                RightNearbyElement.PathElementModel.Direction = Direction.Right;
             }
             else
             {
@@ -121,11 +121,11 @@ namespace World
 
         public void MoveTop(PathTypes pathType = PathTypes.Straight)
         {
-            Direction = PathDirection.Top;
+            Direction = Direction.Top;
             if (ExistTopNearbyElement)
             {
                 TopNearbyElement.TransformObject(ObjectTypes.Path);
-                TopNearbyElement.PathElementModel.Direction = PathDirection.Top;
+                TopNearbyElement.PathElementModel.Direction = Direction.Top;
             }
             else
             {
@@ -135,11 +135,11 @@ namespace World
 
         public void MoveBottom(PathTypes pathType = PathTypes.Straight)
         {
-            Direction = PathDirection.Bottom;
+            Direction = Direction.Bottom;
             if (ExistBottomNearbyElement)
             {
                 BottomNearbyElement.TransformObject(ObjectTypes.Path);
-                BottomNearbyElement.PathElementModel.Direction = PathDirection.Bottom;
+                BottomNearbyElement.PathElementModel.Direction = Direction.Bottom;
             }
             else
             {
@@ -153,64 +153,64 @@ namespace World
 
         public void RotateFromLeftToTop()
         {
-            Direction = PathDirection.Top;
-            Update?.Invoke(PathTypes.Bend, _anglesRotation[PathDirection.LeftToTop]);
+            Direction = Direction.Top;
+            Update?.Invoke(PathTypes.Bend, _anglesRotation[Direction.LeftToTop]);
         }
 
         public void RotateFromLeftToBottom()
         {
-            Direction = PathDirection.Bottom;
-            Update?.Invoke(PathTypes.Bend, _anglesRotation[PathDirection.LeftToBottom]);
+            Direction = Direction.Bottom;
+            Update?.Invoke(PathTypes.Bend, _anglesRotation[Direction.LeftToBottom]);
         }
 
         public void RotateFromRightToTop()
         {
-            Direction = PathDirection.Top;
-            Update?.Invoke(PathTypes.Bend, _anglesRotation[PathDirection.RightToTop]);
+            Direction = Direction.Top;
+            Update?.Invoke(PathTypes.Bend, _anglesRotation[Direction.RightToTop]);
         }
 
         public void RotateFromRightToBottom()
         {
-            Direction = PathDirection.Bottom;
-            Update?.Invoke(PathTypes.Bend, _anglesRotation[PathDirection.RightToBottom]);
+            Direction = Direction.Bottom;
+            Update?.Invoke(PathTypes.Bend, _anglesRotation[Direction.RightToBottom]);
         }
 
         public void RotateFromTopToLeft()
         {
-            Direction = PathDirection.Left;
-            Update?.Invoke(PathTypes.Bend, _anglesRotation[PathDirection.TopToLeft]);
+            Direction = Direction.Left;
+            Update?.Invoke(PathTypes.Bend, _anglesRotation[Direction.TopToLeft]);
         }
 
         public void RotateFromTopToRight()
         {
-            Direction = PathDirection.Right;
-            Update?.Invoke(PathTypes.Bend, _anglesRotation[PathDirection.TopToRight]);
+            Direction = Direction.Right;
+            Update?.Invoke(PathTypes.Bend, _anglesRotation[Direction.TopToRight]);
         }
 
         public void RotateFromBottomToLeft()
         {
-            Direction = PathDirection.Left;
-            Update?.Invoke(PathTypes.Bend, _anglesRotation[PathDirection.BottomToLeft]);
+            Direction = Direction.Left;
+            Update?.Invoke(PathTypes.Bend, _anglesRotation[Direction.BottomToLeft]);
         }
 
         public void RotateFromBottomToRight()
         {
-            Direction = PathDirection.Right;
-            Update?.Invoke(PathTypes.Bend, _anglesRotation[PathDirection.BottomToRight]);
+            Direction = Direction.Right;
+            Update?.Invoke(PathTypes.Bend, _anglesRotation[Direction.BottomToRight]);
         }
 
         #endregion
 
         public void SetStartPath()
         {
-            Direction = PathDirection.None;
             Update?.Invoke(PathTypes.Cross, 0);
+            Direction = Direction.None;
         }
 
         public void SetEndPath()
         {
             Update?.Invoke(PathTypes.End, _anglesStraight[Direction]);
-            Direction = PathDirection.None;
+            Direction = Direction.None;
         }
 
         public void SetDefault()
@@ -223,13 +223,13 @@ namespace World
         {
             switch (Direction)
             {
-                case PathDirection.Left:
+                case Direction.Left:
                     return LeftNearbyElement?.PathElementModel;
-                case PathDirection.Right:
+                case Direction.Right:
                     return RightNearbyElement?.PathElementModel;
-                case PathDirection.Top:
+                case Direction.Top:
                     return TopNearbyElement?.PathElementModel;
-                case PathDirection.Bottom:
+                case Direction.Bottom:
                     return BottomNearbyElement?.PathElementModel;
             }
 

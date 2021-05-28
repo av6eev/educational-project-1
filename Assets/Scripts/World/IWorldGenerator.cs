@@ -1,7 +1,9 @@
-﻿namespace World
+﻿using Utilities;
+
+namespace World
 {
     public interface IWorldGenerator
     {
-        void Generate(WorldModel model);
+        void Generate(GameContext context);
     }
 }

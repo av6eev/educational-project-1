@@ -7,8 +7,8 @@ namespace Utilities
     public class LocationData : ScriptableObject
     {
         [Space][Header("Ground")]
-        public int GroundLength;
-        public int GroundWidth;
+        public int X;
+        public int Z;
         public bool HasGroundPath;
         
         [Space][Header("Tree Settings")]

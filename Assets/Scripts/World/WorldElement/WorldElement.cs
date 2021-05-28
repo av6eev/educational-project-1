@@ -1,29 +1,28 @@
 ﻿using TMPro;
 using UnityEngine;
 
-namespace World
+namespace World.WorldElement
 {
     public class WorldElement : MonoBehaviour
     {
         public Transform SpawnPoint;
         public MeshRenderer MeshRenderer;
-        public TextMeshProUGUI Text;
         private GameObject _prefab;
 
-        public void Set(GameObject obj)
+        public void Set(GameObject obj, float scale = 1)
         {
             if (_prefab != null)
             {
                 Destroy(_prefab);
             }
             
-            MeshRenderer.enabled = false;
             _prefab = Instantiate(obj, SpawnPoint);
+            _prefab.transform.localScale = new Vector3(scale, scale, scale);
         }
 
-        public void SetId(int id)
+        public void DisableGround()
         {
-            Text.text = id.ToString();
+            MeshRenderer.enabled = false;
         }
     }
 }

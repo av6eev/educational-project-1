@@ -1,37 +1,41 @@
 ﻿using System;
 using Utilities;
-using World.Cell;
+using World.Experimental;
+using World.Experimental.Systems;
+using World.Path;
 using World.Tree;
 
 namespace World
 {
     public class WorldController : IController
     {
-        private readonly WorldModel _worldModel;
+        private readonly BlocksWorldModel _worldModel;
         private readonly WorldView _worldView;
-        private readonly GameContext _gameContext;
+        private readonly GameContext _context;
         private ControllerCollection _controllerCollection = new ControllerCollection();
 
-        public WorldController(WorldModel worldModel, WorldView worldView, GameContext gameContext)
+        public WorldController(BlocksWorldModel worldModel, WorldView worldView, GameContext context)
         {
             _worldModel = worldModel;
             _worldView = worldView;
-            _gameContext = gameContext;
+            _context = context;
         }
 
         public void Activate()
         {
-            foreach (var worldElementModel in _worldModel.WorldElementModels)
+            foreach (var block in _worldModel.Blocks)
             {
-                var view = _worldView.Create(worldElementModel.Position);
+                var worldElementView = _worldView.CreateGround(block.Key);
 
-                _controllerCollection.Add(new TreeWorldElementController(worldElementModel.TreeElementModel, view));
-                
-                if (_worldModel.LocationData.HasGroundPath)
+                if (_context.LocationData.HasGroundPath && block.Value.Type == BlockType.Path)
                 {
-                    _controllerCollection.Add(new PathWorldElementController(worldElementModel.PathElementModel, view));
-                    view.WorldElement.SetId(worldElementModel.Id);
+                    _controllerCollection.Add(new PathWorldElementController((PathBlock) block.Value, worldElementView));
                 }
+
+                // if (block.IsTree)
+                // {
+                //     _controllerCollection.Add(new TreeWorldElementController(block.TreeElementModel, worldElementView));
+                // }
             }
             _controllerCollection.Activate();
         }

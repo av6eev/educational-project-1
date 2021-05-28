@@ -1,5 +1,5 @@
 ﻿using Utilities;
-using World.Cell;
+using World.WorldElement;
 
 namespace World.Tree
 {
@@ -15,12 +15,13 @@ namespace World.Tree
         }
         public void Activate()
         {
-            
+            _model.IsUsed = true;
+            _view.ChangeObject(ContentHelper.Trees[_model.TreeType]);
+            _view.Scale = _model.TreeSize;
         }
 
         public void Deactivate()
         {
-            
         }
     }
 }

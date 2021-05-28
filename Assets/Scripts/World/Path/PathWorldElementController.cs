@@ -1,34 +1,28 @@
-﻿using UnityEngine;
-using Utilities;
-using World.Cell;
+﻿using Utilities;
+using World.Experimental;
+using World.WorldElement;
 
-namespace World
+namespace World.Path
 {
     public class PathWorldElementController : IController
     {
-        private readonly PathWorldElementModel _model;
+        private readonly PathBlock _block;
         private readonly WorldElementView _view;
 
-        public PathWorldElementController(PathWorldElementModel model, WorldElementView view)
+        public PathWorldElementController(PathBlock block, WorldElementView view)
         {
-            _model = model;
+            _block = block;
             _view = view;
         }
         
         public void Activate()
         {
-            _model.Update += OnUpdate;
+            _view.ChangeObject(ContentHelper.Pathes[_block.PathType], _block.GetAngle());
+            _view.WorldElement.DisableGround();
         }
 
         public void Deactivate()
         {
-            _model.Update -= OnUpdate;
-        }
-
-        private void OnUpdate(PathTypes obj, int angle)
-        {
-            _model.IsUsed = true;
-            _view.ChangePathObject(obj, angle);
         }
     }
 }

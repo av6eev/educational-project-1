@@ -1,14 +1,16 @@
-﻿using UnityEngine;
-using World.Cell;
+﻿using System;
+using UnityEngine;
+using Utilities;
+using World.Tree;
+using World.WorldElement;
 
 namespace World
 {
     public class WorldView : MonoBehaviour
     {
-        [SerializeField] public WorldElement Ground;
-        [SerializeField] public WorldElement Tree;
+        [SerializeField] public WorldElement.WorldElement Ground;
         
-        public WorldElementView Create(Vector3 worldElementPosition)
+        public WorldElementView CreateGround(Vector3 worldElementPosition)
         {
             var go = Instantiate(Ground, worldElementPosition, Quaternion.identity);
             return new WorldElementView(go);

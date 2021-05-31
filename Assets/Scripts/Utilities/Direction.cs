@@ -6,14 +6,6 @@
         Left,
         Top,
         Bottom,
-        Right,
-        LeftToTop,
-        LeftToBottom,
-        RightToTop,
-        RightToBottom,
-        TopToLeft,
-        TopToRight,
-        BottomToLeft,
-        BottomToRight
+        Right
     }
 }

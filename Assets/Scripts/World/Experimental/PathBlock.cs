@@ -11,39 +11,27 @@ namespace World.Experimental
     {
         private static Dictionary<Direction, int> _anglesStraight = new Dictionary<Direction, int>()
         {
-            {Utilities.Direction.Right, 0},
-            {Utilities.Direction.Left, -180},
-            {Utilities.Direction.Top, -90},
-            {Utilities.Direction.Bottom, 90},
-            {Utilities.Direction.None, 0},
-            // {Utilities.Direction.LeftToTop, -90},
-            // {Utilities.Direction.LeftToBottom, 90},
-            // {Utilities.Direction.RightToTop, -90},
-            // {Utilities.Direction.RightToBottom, 90},
-            // {Utilities.Direction.TopToLeft, -180},
-            // {Utilities.Direction.TopToRight, 0},
-            // {Utilities.Direction.BottomToLeft, -180},
-            // {Utilities.Direction.BottomToRight, 0}
+            {Direction.Right, 0},
+            {Direction.Left, -180},
+            {Direction.Top, -90},
+            {Direction.Bottom, 90},
+            {Direction.None, 0},
         };
 
-        private static Dictionary<Direction, int> _anglesRotation = new Dictionary<Direction, int>()
+        private static Dictionary<AngleDirection, int> _anglesRotation = new Dictionary<AngleDirection, int>()
         {
-            {Utilities.Direction.LeftToTop, 180},
-            {Utilities.Direction.LeftToBottom, -90},
-            {Utilities.Direction.RightToTop, 90},
-            {Utilities.Direction.RightToBottom, 0},
-            {Utilities.Direction.TopToLeft, 0},
-            {Utilities.Direction.TopToRight, -90},
-            {Utilities.Direction.BottomToLeft, 90},
-            {Utilities.Direction.BottomToRight, 180},
-            {Utilities.Direction.None, 0}
+            {AngleDirection.LeftToTop, 180},
+            {AngleDirection.RightToBottom, 0},
+            {AngleDirection.TopToLeft, 0}, //+
+            {AngleDirection.BottomToRight, 180} //+
         };
 
         public PathTypes PathType;
         public Direction Direction;
-        public Direction AngleDirection;
+        public AngleDirection AngleDirection;
         
         public int Id;
+        public bool IsPath;
 
         public PathBlock(int id, Vector3 position) : base(id, position)
         {
@@ -56,27 +44,31 @@ namespace World.Experimental
             Type = BlockType.Path;
         }
 
-        public void Rotate(Direction direction, Direction angleDirection)
+        public void Rotate(Direction direction, AngleDirection angleDirection)
         {
             Direction = direction;
             AngleDirection = angleDirection;
             PathType = PathTypes.Bend;
+            IsPath = true;
         }
         
         public void SetStartPath()
         {
             Direction = Direction.None;
             PathType = PathTypes.Cross;
+            IsPath = true;
         }
 
         public void SetEndPath()
         {
             PathType = PathTypes.End;
+            IsPath = true;
         }
 
         public void SetDefault()
         {
             PathType = PathTypes.Straight;
+            IsPath = true;
         }
 
         public bool TryGetMoveDirection(BlocksWorldModel model, out PathBlock block, Direction direction = Direction.None)
@@ -89,22 +81,36 @@ namespace World.Experimental
             switch (Direction)
             {
                 case Direction.Left:
-                    if (model.Blocks.ContainsKey(LeftBlock))
+                    if (model.Blocks.ContainsKey(LeftBlock) && model.Blocks[LeftBlock].Type != BlockType.Path)
                     {
                         block = new PathBlock(model.Blocks[LeftBlock], Direction);
                         model.Blocks[LeftBlock] = block;
+                        IsPath = true;
                         return true;
                     }
-                    else
+                    else if (model.Blocks.ContainsKey(LeftBlock) && model.Blocks[LeftBlock].Type == BlockType.Path)
+                    {
+                        block = (PathBlock) model.Blocks[LeftBlock];
+                        IsPath = true;
+                        return true;
+                    }
+                    else 
                     {
                         block = null;
                         return false;
                     }
                 case Direction.Right:
-                    if (model.Blocks.ContainsKey(RightBlock))
+                    if (model.Blocks.ContainsKey(RightBlock) && model.Blocks[RightBlock].Type != BlockType.Path)
                     {
                         block = new PathBlock(model.Blocks[RightBlock], Direction);
                         model.Blocks[RightBlock] = block;
+                        IsPath = true;
+                        return true;
+                    }
+                    else if (model.Blocks.ContainsKey(RightBlock) && model.Blocks[RightBlock].Type == BlockType.Path)
+                    {
+                        block = (PathBlock) model.Blocks[RightBlock];
+                        IsPath = true;
                         return true;
                     }
                     else
@@ -113,10 +119,17 @@ namespace World.Experimental
                         return false;
                     }
                 case Direction.Top:
-                    if (model.Blocks.ContainsKey(TopBlock))
+                    if (model.Blocks.ContainsKey(TopBlock) && model.Blocks[TopBlock].Type != BlockType.Path)
                     {
                         block = new PathBlock(model.Blocks[TopBlock], Direction);
                         model.Blocks[TopBlock] = block;
+                        IsPath = true;
+                        return true;
+                    }
+                    else if (model.Blocks.ContainsKey(TopBlock) && model.Blocks[TopBlock].Type == BlockType.Path)
+                    {
+                        block = (PathBlock) model.Blocks[TopBlock];
+                        IsPath = true;
                         return true;
                     }
                     else
@@ -125,10 +138,17 @@ namespace World.Experimental
                         return false;
                     }
                 case Direction.Bottom:
-                    if (model.Blocks.ContainsKey(BottomBlock))
+                    if (model.Blocks.ContainsKey(BottomBlock) && model.Blocks[BottomBlock].Type != BlockType.Path)
                     {
                         block = new PathBlock(model.Blocks[BottomBlock], Direction);
                         model.Blocks[BottomBlock] = block;
+                        IsPath = true;
+                        return true;
+                    }
+                    else if (model.Blocks.ContainsKey(BottomBlock) && model.Blocks[BottomBlock].Type == BlockType.Path)
+                    {
+                        block = (PathBlock) model.Blocks[BottomBlock];
+                        IsPath = true;
                         return true;
                     }
                     else

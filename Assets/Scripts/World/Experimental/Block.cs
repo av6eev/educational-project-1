@@ -13,6 +13,8 @@ namespace World.Experimental
         public Vector3 BottomBlock;
         public BlockType Type;
 
+        public bool IsBorder;
+
         public Block(int id, Vector3 position)
         {
             Id = id;
@@ -26,6 +28,7 @@ namespace World.Experimental
 
         public Block(Block block)
         {
+            IsBorder = block.IsBorder;
             Id = block.Id;
             Position = block.Position;
             RightBlock = block.RightBlock;

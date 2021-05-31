@@ -20,6 +20,12 @@ namespace World
                     var block = new Block(counter, position);
                     
                     context.BlocksWorldModel.Blocks.Add(position, block);
+
+                    if (i == 0 || i == locationData.X - 1 || j == 0 || j == locationData.Z - 1)
+                    {
+                        block.IsBorder = true;
+                    }
+                    
                     counter++;
                 }
             }

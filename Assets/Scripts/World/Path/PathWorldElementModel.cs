@@ -12,31 +12,23 @@ namespace World.Path
 
         private static Dictionary<Direction, int> _anglesStraight = new Dictionary<Direction, int>()
         {
-            {Utilities.Direction.Right, 0},
-            {Utilities.Direction.Left, -180},
-            {Utilities.Direction.Top, -90},
-            {Utilities.Direction.Bottom, 90},
-            {Utilities.Direction.None, 0},
-            {Utilities.Direction.LeftToTop, -90},
-            {Utilities.Direction.LeftToBottom, 90},
-            {Utilities.Direction.RightToTop, -90},
-            {Utilities.Direction.RightToBottom, 90},
-            {Utilities.Direction.TopToLeft, -180},
-            {Utilities.Direction.TopToRight, 0},
-            {Utilities.Direction.BottomToLeft, -180},
-            {Utilities.Direction.BottomToRight, 0}
+            {Direction.Right, 0},
+            {Direction.Left, -180},
+            {Direction.Top, -90},
+            {Direction.Bottom, 90},
+            {Direction.None, 0},
+            // {Direction.LeftToTop, -90},
+            // {Direction.RightToBottom, 90},
+            // {Direction.TopToLeft, -180},
+            // {Direction.BottomToRight, 0}
         };
 
-        private static Dictionary<Direction, int> _anglesRotation = new Dictionary<Direction, int>()
+        private static Dictionary<AngleDirection, int> _anglesRotation = new Dictionary<AngleDirection, int>()
         {
-            {Utilities.Direction.LeftToTop, 180},
-            {Utilities.Direction.LeftToBottom, -90},
-            {Utilities.Direction.RightToTop, 90},
-            {Utilities.Direction.RightToBottom, 0}, 
-            {Utilities.Direction.TopToLeft, 0}, 
-            {Utilities.Direction.TopToRight, -90},
-            {Utilities.Direction.BottomToLeft, 90}, 
-            {Utilities.Direction.BottomToRight, 180}
+            {AngleDirection.LeftToTop, 180},
+            {AngleDirection.RightToBottom, 0}, 
+            {AngleDirection.TopToLeft, 0}, 
+            {AngleDirection.BottomToRight, 180}
         };
 
         public LocationData Data;
@@ -151,53 +143,29 @@ namespace World.Path
 
         #region Rotation
 
-        public void RotateFromLeftToTop()
-        {
-            Direction = Direction.Top;
-            Update?.Invoke(PathTypes.Bend, _anglesRotation[Direction.LeftToTop]);
-        }
-
-        public void RotateFromLeftToBottom()
-        {
-            Direction = Direction.Bottom;
-            Update?.Invoke(PathTypes.Bend, _anglesRotation[Direction.LeftToBottom]);
-        }
-
-        public void RotateFromRightToTop()
-        {
-            Direction = Direction.Top;
-            Update?.Invoke(PathTypes.Bend, _anglesRotation[Direction.RightToTop]);
-        }
-
-        public void RotateFromRightToBottom()
-        {
-            Direction = Direction.Bottom;
-            Update?.Invoke(PathTypes.Bend, _anglesRotation[Direction.RightToBottom]);
-        }
-
-        public void RotateFromTopToLeft()
-        {
-            Direction = Direction.Left;
-            Update?.Invoke(PathTypes.Bend, _anglesRotation[Direction.TopToLeft]);
-        }
-
-        public void RotateFromTopToRight()
-        {
-            Direction = Direction.Right;
-            Update?.Invoke(PathTypes.Bend, _anglesRotation[Direction.TopToRight]);
-        }
-
-        public void RotateFromBottomToLeft()
-        {
-            Direction = Direction.Left;
-            Update?.Invoke(PathTypes.Bend, _anglesRotation[Direction.BottomToLeft]);
-        }
-
-        public void RotateFromBottomToRight()
-        {
-            Direction = Direction.Right;
-            Update?.Invoke(PathTypes.Bend, _anglesRotation[Direction.BottomToRight]);
-        }
+        // public void RotateFromLeftToTop()
+        // {
+        //     Direction = Direction.Top;
+        //     Update?.Invoke(PathTypes.Bend, _anglesRotation[Direction.LeftToTop]);
+        // }
+        //
+        // public void RotateFromRightToBottom()
+        // {
+        //     Direction = Direction.Bottom;
+        //     Update?.Invoke(PathTypes.Bend, _anglesRotation[Direction.RightToBottom]);
+        // }
+        //
+        // public void RotateFromTopToLeft()
+        // {
+        //     Direction = Direction.Left;
+        //     Update?.Invoke(PathTypes.Bend, _anglesRotation[Direction.TopToLeft]);
+        // }
+        //
+        // public void RotateFromBottomToRight()
+        // {
+        //     Direction = Direction.Right;
+        //     Update?.Invoke(PathTypes.Bend, _anglesRotation[Direction.BottomToRight]);
+        // }
 
         #endregion
 

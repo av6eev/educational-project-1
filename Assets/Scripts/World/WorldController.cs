@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 using Utilities;
 using World.Experimental;
 using World.Experimental.Systems;
@@ -32,6 +33,10 @@ namespace World
                     _controllerCollection.Add(new PathWorldElementController((PathBlock) block.Value, worldElementView));
                 }
 
+                if (block.Value.IsBorder)
+                {
+                    worldElementView.WorldElement.MeshRenderer.material.color = Color.red;
+                }
                 // if (block.IsTree)
                 // {
                 //     _controllerCollection.Add(new TreeWorldElementController(block.TreeElementModel, worldElementView));

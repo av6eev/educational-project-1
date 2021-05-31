@@ -11,7 +11,6 @@ namespace World.Path
     {
         public void Generate(GameContext context)
         {
-            var startPoint = Random.Range(0, context.BlocksWorldModel.Blocks.Count);
             var xRandom = Random.Range(0, context.LocationData.X);
             var zRandom = Random.Range(0, context.LocationData.Z);
             var pathBlock = new PathBlock(context.BlocksWorldModel.Blocks[new Vector3(xRandom, 0, zRandom)], Direction.None);

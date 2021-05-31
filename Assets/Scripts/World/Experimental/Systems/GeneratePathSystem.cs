@@ -22,7 +22,7 @@ namespace World.Experimental.Systems
             _context = context;
             _endGeneration = endGeneration;
         }
-        
+
         public void Update()
         {
             foreach (var pathBlock in _remove)
@@ -42,91 +42,95 @@ namespace World.Experimental.Systems
             {
                 _endGeneration?.Invoke();
             }
-            
+
             foreach (var pathBlock in _active)
             {
-                Debug.Log("asdasd");
-                if (Random.Range(0, 100) < _context.LocationData.ChanceToGeneratePath)
+                if (pathBlock.TryGetMoveDirection(_model, out var block))
                 {
-                    if (Random.Range(0, 100) < _context.LocationData.RotationChance)
-                    {
-                        var randomNumber = Random.Range(0, 100);
-
-                        if (pathBlock.Direction == Direction.Left)
-                        {
-                            if (randomNumber < 50)
-                            {
-                                pathBlock.Rotate(Direction.Top, Direction.LeftToTop);
-                            }
-                            else
-                            {
-                                pathBlock.Rotate(Direction.Bottom, Direction.LeftToBottom);
-                            }
-                        }
-
-                        if (pathBlock.Direction == Direction.Right)
-                        {
-                            if (randomNumber < 50)
-                            {
-                                pathBlock.Rotate(Direction.Top, Direction.RightToTop);
-                            }
-                            else
-                            {
-                                pathBlock.Rotate(Direction.Bottom, Direction.RightToBottom);
-                            }
-                        }
-
-                        if (pathBlock.Direction == Direction.Top)
-                        {
-                            if (randomNumber < 50)
-                            {
-                                pathBlock.Rotate(Direction.Left, Direction.TopToLeft);
-                            }
-                            else
-                            {
-                                pathBlock.Rotate(Direction.Right, Direction.TopToRight);
-                            }
-                        }
-
-                        if (pathBlock.Direction == Direction.Bottom)
-                        {
-                            if (randomNumber < 50)
-                            {
-                                pathBlock.Rotate(Direction.Left, Direction.BottomToLeft);
-                            }
-                            else
-                            {
-                                pathBlock.Rotate(Direction.Right, Direction.BottomToRight);
-                            }
-                        }
-                        
-                        if (pathBlock.TryGetMoveDirection(_model, out var block))
-                        {
-                            _add.Add(block);
-                        }
-                    }
-                    else
-                    {
-                        if (pathBlock.TryGetMoveDirection(_model, out var block))
-                        {
-                            _add.Add(block);
-                            block.SetDefault();
-                        }
-                        else
-                        {
-                            pathBlock.SetEndPath();
-                        }
-                    }
-                }
-                else
-                {
-                    if (pathBlock.TryGetMoveDirection(_model, out var block))
+                    if (block.IsBorder)
                     {
                         block.SetEndPath();
                     }
                     else
                     {
-                        pathBlock.SetEndPath();
+                        if (block.IsPath)
+                        {
+                            block.SetStartPath();
+
+                            if (_model.Blocks.ContainsKey(block.LeftBlock) && _model.Blocks[block.LeftBlock].Type != BlockType.Ground)
+                            {
+                                if (block.TryGetMoveDirection(_model, out var leftBlock, Direction.Left))
+                                {
+                                    leftBlock.SetDefault();
+                                    _add.Add(leftBlock);
+                                }
+                            }
+
+                            if (_model.Blocks.ContainsKey(block.RightBlock) && _model.Blocks[block.RightBlock].Type != BlockType.Ground)
+                            {
+                                if (block.TryGetMoveDirection(_model, out var rightBlock, Direction.Right))
+                                {
+                                    rightBlock.SetDefault();
+                                    _add.Add(rightBlock);
+                                }
+                            }
+
+                            if (_model.Blocks.ContainsKey(block.TopBlock) && _model.Blocks[block.TopBlock].Type != BlockType.Ground)
+                            {
+                                if (block.TryGetMoveDirection(_model, out var topBlock, Direction.Top))
+                                {
+                                    topBlock.SetDefault();
+                                    _add.Add(topBlock);
+                                }
+                            }
+
+                            if (_model.Blocks.ContainsKey(block.BottomBlock) && _model.Blocks[block.BottomBlock].Type != BlockType.Ground)
+                            {
+                                if (block.TryGetMoveDirection(_model, out var bottomBlock, Direction.Bottom))
+                                {
+                                    bottomBlock.SetDefault();
+                                    _add.Add(bottomBlock);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            if (Random.Range(0, 100) < _context.LocationData.ChanceToGeneratePath)
+                            {
+                                if (Random.Range(0, 100) < _context.LocationData.RotationChance)
+                                {
+                                    if (pathBlock.Direction == Direction.Left)
+                                    {
+                                        block.Rotate(Direction.Top, AngleDirection.LeftToTop);
+                                    }
+
+                                    if (pathBlock.Direction == Direction.Right)
+                                    {
+                                        block.Rotate(Direction.Bottom, AngleDirection.RightToBottom);
+                                    }
+
+                                    if (pathBlock.Direction == Direction.Top)
+                                    {
+                                        block.Rotate(Direction.Left, AngleDirection.TopToLeft);
+                                    }
+
+                                    if (pathBlock.Direction == Direction.Bottom)
+                                    {
+                                        block.Rotate(Direction.Right, AngleDirection.BottomToRight);
+                                    }
+                                }
+                                else
+                                {
+                                    block.SetDefault();
+                                }
+
+                                _add.Add(block);
+                            }
+                            else
+                            {
+                                block.SetEndPath();
+                            }
+                        }
                     }
                 }
 

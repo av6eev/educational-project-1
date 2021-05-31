@@ -20,4 +20,4 @@ MonoBehaviour:
   MinTreeSize: 0.5
   MaxTreeSize: 1
   ChanceToGeneratePath: 90
-  RotationChance: 10
+  RotationChance: 50

@@ -1,21 +1,22 @@
 ﻿using Utilities;
+using World.Experimental;
 using World.WorldElement;
 
 namespace World.Tree
 {
-    public class TreeWorldElementController : IController
+    public class TreeController : IController
     {
-        private readonly TreeWorldElementModel _model;
+        private readonly TreeBlock _model;
         private readonly WorldElementView _view;
 
-        public TreeWorldElementController(TreeWorldElementModel model, WorldElementView view)
+        public TreeController(TreeBlock model, WorldElementView view)
         {
             _model = model;
             _view = view;
         }
         public void Activate()
         {
-            _model.IsUsed = true;
+            _model.IsTree = true;
             _view.ChangeObject(ContentHelper.Trees[_model.TreeType]);
             _view.Scale = _model.TreeSize;
         }

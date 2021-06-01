@@ -6,7 +6,7 @@ namespace Utilities
 {
     public class GameContext
     {
-        public BlocksWorldModel BlocksWorldModel;
+        public BlockWorldModel BlockWorldModel;
         
         public LocationData LocationData;
 

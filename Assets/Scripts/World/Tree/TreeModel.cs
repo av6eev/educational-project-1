@@ -5,7 +5,7 @@ namespace World.Tree
 {
     public class TreeWorldElementModel
     {
-        public event Action<TreeTypes> Update;
+        public event Action<TreeTypes, float> Update;
 
         public LocationData Data;
 
@@ -15,7 +15,7 @@ namespace World.Tree
 
         public void SetTree(TreeTypes typeTree, float treeSize)
         {
-            Update?.Invoke(typeTree);
+            Update?.Invoke(typeTree, treeSize);
             TreeType = typeTree;
             TreeSize = treeSize;
         }

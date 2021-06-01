@@ -14,6 +14,8 @@ namespace World.Experimental
         public BlockType Type;
 
         public bool IsBorder;
+        public bool IsPath;
+        public bool IsTree;
 
         public Block(int id, Vector3 position)
         {
@@ -29,7 +31,11 @@ namespace World.Experimental
         public Block(Block block)
         {
             IsBorder = block.IsBorder;
+            IsPath = block.IsPath;
+            IsTree = block.IsTree;
+            
             Id = block.Id;
+            
             Position = block.Position;
             RightBlock = block.RightBlock;
             LeftBlock = block.LeftBlock;

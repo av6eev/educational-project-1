@@ -5,7 +5,7 @@ using World.WorldElement;
 
 namespace World
 {
-    public class WorldGroundGenerator : IWorldGenerator
+    public class GroundGenerator : IWorldGenerator
     {
         public void Generate(GameContext context)
         {
@@ -19,7 +19,7 @@ namespace World
                     var position = new Vector3(i, 0, j);
                     var block = new Block(counter, position);
                     
-                    context.BlocksWorldModel.Blocks.Add(position, block);
+                    context.BlockWorldModel.Blocks.Add(position, block);
 
                     if (i == 0 || i == locationData.X - 1 || j == 0 || j == locationData.Z - 1)
                     {

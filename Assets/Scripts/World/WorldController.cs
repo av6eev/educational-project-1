@@ -10,12 +10,12 @@ namespace World
 {
     public class WorldController : IController
     {
-        private readonly BlocksWorldModel _worldModel;
+        private readonly BlockWorldModel _worldModel;
         private readonly WorldView _worldView;
         private readonly GameContext _context;
         private ControllerCollection _controllerCollection = new ControllerCollection();
 
-        public WorldController(BlocksWorldModel worldModel, WorldView worldView, GameContext context)
+        public WorldController(BlockWorldModel worldModel, WorldView worldView, GameContext context)
         {
             _worldModel = worldModel;
             _worldView = worldView;
@@ -30,16 +30,17 @@ namespace World
 
                 if (_context.LocationData.HasGroundPath && block.Value.Type == BlockType.Path)
                 {
-                    _controllerCollection.Add(new PathWorldElementController((PathBlock) block.Value, worldElementView));
+                    _controllerCollection.Add(new PathController((PathBlock) block.Value, worldElementView));
                 }
 
                 if (block.Value.IsBorder)
                 {
                     worldElementView.WorldElement.MeshRenderer.material.color = Color.red;
                 }
-                // if (block.IsTree)
+
+                // if (block.Value.Type == BlockType.Tree)
                 // {
-                //     _controllerCollection.Add(new TreeWorldElementController(block.TreeElementModel, worldElementView));
+                //     _controllerCollection.Add(new TreeWorldElementController((TreeBlock) block.Value, worldElementView));
                 // }
             }
             _controllerCollection.Activate();

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace World.Experimental
 {
-    public class BlocksWorldModel
+    public class BlockWorldModel
     {
         public Dictionary<Vector3, Block> Blocks = new Dictionary<Vector3, Block>();
     }

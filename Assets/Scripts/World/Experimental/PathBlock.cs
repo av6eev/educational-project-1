@@ -31,7 +31,6 @@ namespace World.Experimental
         public AngleDirection AngleDirection;
         
         public int Id;
-        public bool IsPath;
 
         public PathBlock(int id, Vector3 position) : base(id, position)
         {
@@ -71,7 +70,7 @@ namespace World.Experimental
             IsPath = true;
         }
 
-        public bool TryGetMoveDirection(BlocksWorldModel model, out PathBlock block, Direction direction = Direction.None)
+        public bool TryGetMoveDirection(BlockWorldModel model, out PathBlock block, Direction direction = Direction.None)
         {
             if (direction != Direction.None)
             {

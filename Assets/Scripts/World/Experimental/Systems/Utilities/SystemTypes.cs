@@ -3,5 +3,6 @@
     public enum SystemTypes
     {
         GeneratePathSystem,
+        GenerateTreeSystem
     }
 }

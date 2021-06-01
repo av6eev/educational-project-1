@@ -12,11 +12,11 @@ namespace World.Experimental.Systems
         private readonly List<PathBlock> _active = new List<PathBlock>();
         private readonly List<PathBlock> _remove = new List<PathBlock>();
         private readonly List<PathBlock> _add = new List<PathBlock>();
-        private BlocksWorldModel _model;
+        private BlockWorldModel _model;
         private readonly GameContext _context;
         private readonly Action _endGeneration;
 
-        public GeneratePathSystem(BlocksWorldModel model, GameContext context, Action endGeneration)
+        public GeneratePathSystem(BlockWorldModel model, GameContext context, Action endGeneration)
         {
             _model = model;
             _context = context;

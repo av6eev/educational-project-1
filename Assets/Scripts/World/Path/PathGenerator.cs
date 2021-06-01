@@ -7,36 +7,36 @@ using Random = UnityEngine.Random;
 
 namespace World.Path
 {
-    public class WorldPathGenerator : IWorldGenerator
+    public class PathGenerator : IWorldGenerator
     {
         public void Generate(GameContext context)
         {
             var xRandom = Random.Range(0, context.LocationData.X);
             var zRandom = Random.Range(0, context.LocationData.Z);
-            var pathBlock = new PathBlock(context.BlocksWorldModel.Blocks[new Vector3(xRandom, 0, zRandom)], Direction.None);
+            var pathBlock = new PathBlock(context.BlockWorldModel.Blocks[new Vector3(xRandom, 0, zRandom)], Direction.None);
             
-            context.BlocksWorldModel.Blocks[new Vector3(xRandom, 0, zRandom)] = pathBlock;
+            context.BlockWorldModel.Blocks[new Vector3(xRandom, 0, zRandom)] = pathBlock;
      
             pathBlock.SetStartPath();
 
             var system = context.SystemCollection.Get<GeneratePathSystem>(SystemTypes.GeneratePathSystem);
 
-            if (pathBlock.TryGetMoveDirection(context.BlocksWorldModel, out var leftBlock, Direction.Left))
+            if (pathBlock.TryGetMoveDirection(context.BlockWorldModel, out var leftBlock, Direction.Left))
             {
                 leftBlock.SetDefault();
                 system.Add(leftBlock);
             }
-            if (pathBlock.TryGetMoveDirection(context.BlocksWorldModel, out var rightBlock, Direction.Right))
+            if (pathBlock.TryGetMoveDirection(context.BlockWorldModel, out var rightBlock, Direction.Right))
             {
                 rightBlock.SetDefault();
                 system.Add(rightBlock);
             }
-            if (pathBlock.TryGetMoveDirection(context.BlocksWorldModel, out var topBlock, Direction.Top))
+            if (pathBlock.TryGetMoveDirection(context.BlockWorldModel, out var topBlock, Direction.Top))
             {
                 topBlock.SetDefault();
                 system.Add(topBlock);
             }
-            if (pathBlock.TryGetMoveDirection(context.BlocksWorldModel, out var bottomBlock, Direction.Bottom))
+            if (pathBlock.TryGetMoveDirection(context.BlockWorldModel, out var bottomBlock, Direction.Bottom))
             {
                 bottomBlock.SetDefault();
                 system.Add(bottomBlock);

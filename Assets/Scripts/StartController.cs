@@ -5,6 +5,7 @@ using Utilities;
 using World;
 using World.Experimental;
 using World.Experimental.Systems;
+using World.Experimental.Systems.Tree;
 using World.Path;
 using World.Tree;
 
@@ -19,20 +20,21 @@ public class StartController : MonoBehaviour
 
     void Start()
     {
-        var blocksWorldModel = new BlocksWorldModel();
+        var blocksWorldModel = new BlockWorldModel();
 
         _gameContext.LocationData = _locationData;
-        _gameContext.BlocksWorldModel = blocksWorldModel;
+        _gameContext.BlockWorldModel = blocksWorldModel;
         _gameContext.SystemCollection = _systemCollection;
         
-        _systemCollection.Add(SystemTypes.GeneratePathSystem, new GeneratePathSystem(_gameContext.BlocksWorldModel, _gameContext, EndGeneration));
+        _systemCollection.Add(SystemTypes.GeneratePathSystem, new GeneratePathSystem(_gameContext.BlockWorldModel, _gameContext, EndGeneration));
+        _systemCollection.Add(SystemTypes.GenerateTreeSystem, new GenerateTreeSystem(_gameContext.BlockWorldModel, _gameContext, EndGeneration));
 
-        new WorldGroundGenerator().Generate(_gameContext);
-        // new WorldTreeGenerator().Generate(worldModel);
+        new GroundGenerator().Generate(_gameContext);
+        new TreeGenerator().Generate(_gameContext);
 
         if (_locationData.HasGroundPath)
         {
-            new WorldPathGenerator().Generate(_gameContext);
+            new PathGenerator().Generate(_gameContext);
         }
         
         _controllerCollection.Add(new WorldController(blocksWorldModel, _worldView, _gameContext));
@@ -46,6 +48,7 @@ public class StartController : MonoBehaviour
     private void EndGeneration()
     {
         _systemCollection.Remove(SystemTypes.GeneratePathSystem);
+        _systemCollection.Remove(SystemTypes.GenerateTreeSystem);
         _controllerCollection.Activate();
     }
 }

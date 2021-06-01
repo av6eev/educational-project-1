@@ -3,6 +3,7 @@
     public enum BlockType
     {
         Ground,
-        Path
+        Path,
+        Tree
     }
 }

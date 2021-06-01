@@ -4,12 +4,12 @@ using World.WorldElement;
 
 namespace World.Path
 {
-    public class PathWorldElementController : IController
+    public class PathController : IController
     {
         private readonly PathBlock _block;
         private readonly WorldElementView _view;
 
-        public PathWorldElementController(PathBlock block, WorldElementView view)
+        public PathController(PathBlock block, WorldElementView view)
         {
             _block = block;
             _view = view;

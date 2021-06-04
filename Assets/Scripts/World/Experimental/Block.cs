@@ -21,7 +21,7 @@ namespace World.Experimental
         {
             Id = id;
             Position = position;
-            
+
             RightBlock = new Vector3(position.x,0, position.z + 1);
             LeftBlock = new Vector3(position.x, 0, position.z - 1);
             TopBlock = new Vector3(position.x - 1, 0, position.z);

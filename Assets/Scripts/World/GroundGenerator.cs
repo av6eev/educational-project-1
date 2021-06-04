@@ -19,6 +19,7 @@ namespace World
                     var position = new Vector3(i, 0, j);
                     var block = new Block(counter, position);
                     
+                    block.Type = BlockType.Ground;
                     context.BlockWorldModel.Blocks.Add(position, block);
 
                     if (i == 0 || i == locationData.X - 1 || j == 0 || j == locationData.Z - 1)

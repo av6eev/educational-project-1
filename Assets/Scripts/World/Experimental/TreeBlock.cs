@@ -10,10 +10,9 @@ namespace World.Experimental
         public TreeTypes TreeType;
         public float TreeSize;
         
-        public bool IsTree;
-        
         public TreeBlock(int id, Vector3 position) : base(id, position)
         {
+            Type = BlockType.Tree;
         }
 
         public TreeBlock(Block block, float treeSize, TreeTypes treeType) : base(block)
@@ -21,7 +20,7 @@ namespace World.Experimental
             TreeSize = treeSize;
             TreeType = treeType;
             
-            Position = block.Position;
+            Type = BlockType.Tree;
         }
 
         public void Set(TreeTypes typeTree, float treeSize)

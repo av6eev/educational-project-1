@@ -38,10 +38,10 @@ namespace World
                     worldElementView.WorldElement.MeshRenderer.material.color = Color.red;
                 }
 
-                // if (block.Value.Type == BlockType.Tree)
-                // {
-                //     _controllerCollection.Add(new TreeWorldElementController((TreeBlock) block.Value, worldElementView));
-                // }
+                if (!block.Value.IsBorder && block.Value.Type == BlockType.Tree)
+                {
+                    _controllerCollection.Add(new TreeController((TreeBlock) block.Value, worldElementView));
+                }
             }
             _controllerCollection.Activate();
         }

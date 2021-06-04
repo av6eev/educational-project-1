@@ -29,8 +29,6 @@ namespace World.Experimental
         public PathTypes PathType;
         public Direction Direction;
         public AngleDirection AngleDirection;
-        
-        public int Id;
 
         public PathBlock(int id, Vector3 position) : base(id, position)
         {

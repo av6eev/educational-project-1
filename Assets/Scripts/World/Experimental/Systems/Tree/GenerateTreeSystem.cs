@@ -29,6 +29,7 @@ namespace World.Experimental.Systems.Tree
             }
 
             _remove.Clear();
+            
             foreach (var pathBlock in _add)
             {
                 _active.Add(pathBlock);
@@ -43,10 +44,14 @@ namespace World.Experimental.Systems.Tree
 
             foreach (var treeBlock in _active)
             {
-                if (!treeBlock.IsTree || !treeBlock.IsBorder || !treeBlock.IsPath)
+                if (!treeBlock.IsTree || !treeBlock.IsPath || !treeBlock.IsBorder)
                 {
                     treeBlock.Set(treeBlock.TreeType, treeBlock.TreeSize);
+                    
+                    _add.Add(treeBlock);
                 }
+                
+                _remove.Add(treeBlock);
             }
         }
 

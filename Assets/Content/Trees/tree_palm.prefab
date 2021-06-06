@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 5182322119359435981}
   - component: {fileID: 8089754760608914280}
   - component: {fileID: 6314154833440829346}
-  - component: {fileID: 1957881561360890905}
   m_Layer: 0
   m_Name: tree_palm
   m_TagString: Untagged
@@ -84,18 +83,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &1957881561360890905
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5521587064478486135}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d73087eedd6b4663803089ccfe3cdc4b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SpawnPoint: {fileID: 5182322119359435981}
-  MeshRenderer: {fileID: 6314154833440829346}
-  Text: {fileID: 0}

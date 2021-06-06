@@ -7,5 +7,6 @@
         End,
         StraightWithRocks,
         Straight,
+        Bridge
     }
 }

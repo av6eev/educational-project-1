@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using Utilities;
-using World.Experimental;
-using World.Experimental.Systems;
-using World.Experimental.Systems.Tree;
+using World.Block;
+using World.Systems.Tree;
+using World.Systems.Utilities;
+using World.Utilities;
 
 namespace World.Tree
 {
@@ -16,23 +17,23 @@ namespace World.Tree
             
             for (var i = 0; i < locationData.TreesCount; i++)
             {
-                var xRandom = Random.Range(0, locationData.X);
-                var zRandom = Random.Range(0, locationData.Z);
+                var x = Random.Range(0, locationData.X);
+                var z = Random.Range(0, locationData.Z);
             
                 var treeSize = Random.Range(locationData.MinTreeSize, locationData.MaxTreeSize);
                 var typeTree = Random.Range(0, locationData.TreeTypes.Count);
-                var treeBlock = new TreeBlock(blocks[new Vector3(xRandom, 0, zRandom)], treeSize, (TreeTypes)typeTree);
+                var treeBlock = new TreeBlock(blocks[new Vector3(x, 0, z)], treeSize, (TreeTypes)typeTree);
                 
                 treeBlock.Type = BlockType.Tree;
-                blocks[new Vector3(xRandom, 0, zRandom)] = treeBlock;
+                blocks[new Vector3(x, 0, z)] = treeBlock;
                 
-                while (treeBlock.IsBorder || treeBlock.Type == BlockType.Path)
+                while (treeBlock.IsBorder || treeBlock.Type == BlockType.Path || treeBlock.Type == BlockType.Crop)
                 {
-                    xRandom = Random.Range(0, locationData.X);
-                    zRandom = Random.Range(0, locationData.Z);
+                    x = Random.Range(0, locationData.X);
+                    z = Random.Range(0, locationData.Z);
 
-                    treeBlock = new TreeBlock(blocks[new Vector3(xRandom, 0, zRandom)], treeSize, (TreeTypes)typeTree);
-                    blocks[new Vector3(xRandom, 0, zRandom)] = treeBlock;
+                    treeBlock = new TreeBlock(blocks[new Vector3(x, 0, z)], treeSize, (TreeTypes)typeTree);
+                    blocks[new Vector3(x, 0, z)] = treeBlock;
                 }
 
                 system.Add(treeBlock);

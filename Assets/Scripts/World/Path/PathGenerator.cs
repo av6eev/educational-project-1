@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using Utilities;
-using World.Experimental;
-using World.Experimental.Systems;
+using World.Block;
+using World.Systems.Path;
+using World.Systems.Utilities;
+using World.Utilities;
 using Random = UnityEngine.Random;
 
 namespace World.Path
@@ -11,19 +13,20 @@ namespace World.Path
     {
         public void Generate(GameContext context)
         {
-            var xRandom = Random.Range(0, context.LocationData.X);
-            var zRandom = Random.Range(0, context.LocationData.Z);
-            var pathBlock = new PathBlock(context.BlockWorldModel.Blocks[new Vector3(xRandom, 0, zRandom)], Direction.None);
+            var x = Random.Range(0, context.LocationData.X);
+            var z = Random.Range(0, context.LocationData.Z);
+            var pathBlock = new PathBlock(context.BlockWorldModel.Blocks[new Vector3(x, 0, z)], Direction.None);
+            
+            pathBlock.Type = BlockType.Path;
+            context.BlockWorldModel.Blocks[new Vector3(x, 0, z)] = pathBlock;
 
-            context.BlockWorldModel.Blocks[new Vector3(xRandom, 0, zRandom)] = pathBlock;
-
-            while (pathBlock.IsBorder)
+            while (pathBlock.IsBorder || pathBlock.IsRiver || pathBlock.IsCrop || pathBlock.IsTree)
             {
-                xRandom = Random.Range(0, context.LocationData.X);
-                zRandom = Random.Range(0, context.LocationData.Z);
-                pathBlock = new PathBlock(context.BlockWorldModel.Blocks[new Vector3(xRandom, 0, zRandom)], Direction.None);
+                x = Random.Range(0, context.LocationData.X);
+                z = Random.Range(0, context.LocationData.Z);
+                pathBlock = new PathBlock(context.BlockWorldModel.Blocks[new Vector3(x, 0, z)], Direction.None);
 
-                context.BlockWorldModel.Blocks[new Vector3(xRandom, 0, zRandom)] = pathBlock;
+                context.BlockWorldModel.Blocks[new Vector3(x, 0, z)] = pathBlock;
             }
             
             pathBlock.SetStartPath();

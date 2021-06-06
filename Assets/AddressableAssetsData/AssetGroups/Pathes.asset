@@ -21,32 +21,38 @@ MonoBehaviour:
     m_Address: ground_pathBend
     m_ReadOnly: 0
     m_SerializedLabels: []
-    m_MainAsset: {fileID: 7538261445066156770, guid: 0e83f9160c6162142b5a48b4b1d9a633, type: 3}
-    m_TargetAsset: {fileID: 7538261445066156770, guid: 0e83f9160c6162142b5a48b4b1d9a633, type: 3}
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
   - m_GUID: 349475875a0c5fe4db9c4445afcc5f53
     m_Address: ground_pathCross
     m_ReadOnly: 0
     m_SerializedLabels: []
-    m_MainAsset: {fileID: 3096047259894186236, guid: 349475875a0c5fe4db9c4445afcc5f53, type: 3}
-    m_TargetAsset: {fileID: 3096047259894186236, guid: 349475875a0c5fe4db9c4445afcc5f53, type: 3}
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
   - m_GUID: b3098d0d4c2ac064b8713150a56633de
     m_Address: ground_pathEnd
     m_ReadOnly: 0
     m_SerializedLabels: []
-    m_MainAsset: {fileID: 2711799882470079144, guid: b3098d0d4c2ac064b8713150a56633de, type: 3}
-    m_TargetAsset: {fileID: 2711799882470079144, guid: b3098d0d4c2ac064b8713150a56633de, type: 3}
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
   - m_GUID: 401d6d9d241750444a7b6f1d603f7536
     m_Address: ground_pathRocks
     m_ReadOnly: 0
     m_SerializedLabels: []
-    m_MainAsset: {fileID: 2989372672027678373, guid: 401d6d9d241750444a7b6f1d603f7536, type: 3}
-    m_TargetAsset: {fileID: 2989372672027678373, guid: 401d6d9d241750444a7b6f1d603f7536, type: 3}
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
   - m_GUID: 1667c5ae8631b4b4b9726ae804aabf8e
     m_Address: ground_pathStraight
     m_ReadOnly: 0
     m_SerializedLabels: []
-    m_MainAsset: {fileID: 3638856504649373016, guid: 1667c5ae8631b4b4b9726ae804aabf8e, type: 3}
-    m_TargetAsset: {fileID: 3638856504649373016, guid: 1667c5ae8631b4b4b9726ae804aabf8e, type: 3}
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: bb13e6c0ca9ebb84ca55abfcb6d86dc5
+    m_Address: bridge_woodNarrow
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 3671456584748568836, guid: bb13e6c0ca9ebb84ca55abfcb6d86dc5, type: 3}
+    m_TargetAsset: {fileID: 3671456584748568836, guid: bb13e6c0ca9ebb84ca55abfcb6d86dc5, type: 3}
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: a556e9fcf6e48cd4faccc15f2f57fc2f, type: 2}
   m_SchemaSet:

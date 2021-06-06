@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Lakes
+  m_EditorClassIdentifier: 
+  m_GroupName: Lakes
+  m_Data:
+    m_SerializedData: []
+  m_GUID: eadcd6d5361814d4299b009626293d18
+  m_SerializeEntries:
+  - m_GUID: 5c5edefb4754ec94cbcfcf88c5a5b19e
+    m_Address: ground_riverCorner
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 3923831183305973431, guid: 5c5edefb4754ec94cbcfcf88c5a5b19e, type: 3}
+    m_TargetAsset: {fileID: 3923831183305973431, guid: 5c5edefb4754ec94cbcfcf88c5a5b19e, type: 3}
+  - m_GUID: 2d9afb557d282344caa6299fbfd1f4f2
+    m_Address: ground_riverOpen
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 1312654446175200968, guid: 2d9afb557d282344caa6299fbfd1f4f2, type: 3}
+    m_TargetAsset: {fileID: 1312654446175200968, guid: 2d9afb557d282344caa6299fbfd1f4f2, type: 3}
+  - m_GUID: 5a9093e8128be44449aaa8e20c7bd441
+    m_Address: ground_riverSide
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 1488655818625036426, guid: 5a9093e8128be44449aaa8e20c7bd441, type: 3}
+    m_TargetAsset: {fileID: 1488655818625036426, guid: 5a9093e8128be44449aaa8e20c7bd441, type: 3}
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: a556e9fcf6e48cd4faccc15f2f57fc2f, type: 2}
+  m_SchemaSet:
+    m_Schemas: []

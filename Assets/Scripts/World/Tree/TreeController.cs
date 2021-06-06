@@ -1,6 +1,6 @@
 ﻿using System;
 using Utilities;
-using World.Experimental;
+using World.Systems.Tree;
 using World.WorldElement;
 
 namespace World.Tree
@@ -19,7 +19,7 @@ namespace World.Tree
         {
             _model.IsTree = true;
             _view.ChangeObject(ContentHelper.Trees[_model.TreeType]);
-            _view.Scale = _model.TreeSize;
+            _view.Scale = _model.Size;
         }
 
         public void Deactivate()

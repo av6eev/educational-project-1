@@ -12,12 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1c1f88f13bc450bb6ee82b8fedf03a3, type: 3}
   m_Name: GameData
   m_EditorClassIdentifier: 
-  X: 20
-  Z: 20
-  HasGroundPath: 1
+  X: 30
+  Z: 30
+  HasPath: 0
+  HasRiver: 0
+  HasLake: 1
   TreeTypes: 0000000001000000020000000300000004000000
   TreesCount: 40
   MinTreeSize: 0.5
   MaxTreeSize: 1
-  ChanceToGeneratePath: 90
-  RotationChance: 50
+  ChanceToGeneratePath: 70
+  PathRotationChance: 20
+  CropTypes: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b000000
+  CropsCount: 50
+  RiversCount: 2
+  ChanceToGenerateRiver: 80
+  RiverRotationChance: 50
+  LakesCount: 1
+  LakeSize: 3

@@ -1,4 +1,4 @@
-﻿namespace World
+﻿namespace World.Utilities
 {
     public enum ObjectTypes
     {

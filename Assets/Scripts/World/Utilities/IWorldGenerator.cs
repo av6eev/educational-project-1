@@ -1,6 +1,6 @@
 ﻿using Utilities;
 
-namespace World
+namespace World.Utilities
 {
     public interface IWorldGenerator
     {

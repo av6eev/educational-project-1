@@ -1,9 +1,8 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using Utilities;
 using World.Block;
 
-namespace World.Systems.Crop
+namespace World.Crop
 {
     public class CropBlock : BaseBlock
     {

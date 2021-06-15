@@ -2,7 +2,7 @@
 using Utilities;
 using World.Block;
 
-namespace World.Systems.Lake
+namespace World.Lake
 {
     public class LakeBlock : BaseBlock
     {

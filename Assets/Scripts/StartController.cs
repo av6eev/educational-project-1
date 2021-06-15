@@ -4,11 +4,13 @@ using UnityEngine;
 using Utilities;
 using World;
 using World.Block;
+using World.Chunks;
 using World.Crop;
 using World.Ground;
 using World.Lake;
 using World.Path;
 using World.River;
+using World.Systems.Chunks;
 using World.Systems.Crop;
 using World.Systems.Path;
 using World.Systems.River;
@@ -28,44 +30,35 @@ public class StartController : MonoBehaviour
     void Start()
     {
         var blocksWorldModel = new BlockWorldModel();
-
+        var chunkModel = new ChunkModel();
+        
         _gameContext.LocationData = _locationData;
         _gameContext.BlockWorldModel = blocksWorldModel;
+        _gameContext.ChunkModel = chunkModel;
         _gameContext.SystemCollection = _systemCollection;
         
-        _systemCollection.Add(SystemTypes.GeneratePathSystem, new GeneratePathSystem(_gameContext.BlockWorldModel, _gameContext, EndGeneration));
+        _systemCollection.Add(SystemTypes.GenerateChunkSystem, new GenerateChunkSystem(_gameContext.ChunkModel, _gameContext, EndGeneration));
+        // _systemCollection.Add(SystemTypes.GeneratePathSystem, new GeneratePathSystem(_gameContext.BlockWorldModel, _gameContext, EndGeneration));
         // _systemCollection.Add(SystemTypes.GenerateRiverSystem, new GenerateRiverSystem(_gameContext.BlockWorldModel, _gameContext, EndGeneration));
-        _systemCollection.Add(SystemTypes.GenerateTreeSystem, new GenerateTreeSystem(_gameContext.BlockWorldModel, _gameContext, EndGeneration));
-        _systemCollection.Add(SystemTypes.GenerateCropSystem, new GenerateCropSystem(_gameContext.BlockWorldModel, _gameContext, EndGeneration));
+        // _systemCollection.Add(SystemTypes.GenerateTreeSystem, new GenerateTreeSystem(_gameContext.BlockWorldModel, _gameContext, EndGeneration));
+        // _systemCollection.Add(SystemTypes.GenerateCropSystem, new GenerateCropSystem(_gameContext.BlockWorldModel, _gameContext, EndGeneration));
 
         new GroundGenerator().Generate(_gameContext);
         
         if (_locationData.HasTree)
-        {
             new TreeGenerator().Generate(_gameContext);
-            
-        }
         
         if (_locationData.HasCrop) 
-        {
             new CropGenerator().Generate(_gameContext);
-            
-        }
 
         if (_locationData.HasPath)
-        {
             new PathGenerator().Generate(_gameContext);
-        }
 
         if (_locationData.HasRiver)
-        {
             // new RiverGenerator().Generate(_gameContext);
-        }
         
         if (_locationData.HasLake)
-        {
             new LakeGenerator().Generate(_gameContext);
-        }
         
         _controllerCollection.Add(new WorldController(blocksWorldModel, _worldView, _gameContext));
     }
@@ -77,6 +70,7 @@ public class StartController : MonoBehaviour
 
     private void EndGeneration()
     {
+        _systemCollection.Remove(SystemTypes.GenerateChunkSystem);
         _systemCollection.Remove(SystemTypes.GeneratePathSystem);
         _systemCollection.Remove(SystemTypes.GenerateRiverSystem);
         _systemCollection.Remove(SystemTypes.GenerateTreeSystem);

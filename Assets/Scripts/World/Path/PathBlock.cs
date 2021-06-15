@@ -3,7 +3,7 @@ using UnityEngine;
 using Utilities;
 using World.Block;
 
-namespace World.Systems.Path
+namespace World.Path
 {
     public class PathBlock : BaseBlock
     {

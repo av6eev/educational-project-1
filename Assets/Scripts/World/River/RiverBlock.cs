@@ -3,7 +3,7 @@ using UnityEngine;
 using Utilities;
 using World.Block;
 
-namespace World.Systems.River
+namespace World.River
 {
     public class RiverBlock : BaseBlock
     {

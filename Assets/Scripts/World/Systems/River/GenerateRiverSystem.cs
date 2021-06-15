@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Utilities;
 using World.Block;
+using World.River;
 using World.Systems.Path;
 using World.Systems.Utilities;
 using Random = UnityEngine.Random;

@@ -9,6 +9,7 @@ namespace Utilities
         [Space][Header("World Settings")]
         public int X;
         public int Z;
+        public int ChunkSize;
         public bool HasPath;
         public bool HasTree;
         public bool HasCrop;

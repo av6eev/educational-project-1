@@ -5,6 +5,7 @@
         GeneratePathSystem,
         GenerateTreeSystem,
         GenerateCropSystem,
-        GenerateRiverSystem
+        GenerateRiverSystem,
+        GenerateChunkSystem
     }
 }

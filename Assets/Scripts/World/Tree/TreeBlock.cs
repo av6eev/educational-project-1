@@ -3,7 +3,7 @@ using UnityEngine;
 using Utilities;
 using World.Block;
 
-namespace World.Systems.Tree
+namespace World.Tree
 {
     public class TreeBlock : BaseBlock
     {
